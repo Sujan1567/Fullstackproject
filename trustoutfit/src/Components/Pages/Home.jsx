@@ -39,7 +39,7 @@ import brideoutfit from '../Images/bridelehanga.jpg';
 import Formalpantswomen from '../Images/Formalpantswomen.jpg';
 // import menblack from '../Images/Menblack.jpg';
 import Login from './Login';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 
 
@@ -85,8 +85,13 @@ const Home = () => {
                             <input className="form-control me-2" id='searchbar' type="search" placeholder="Search products" aria-label="Search" />
                             <button className="btn btn-outline-success" id='searchbtn' type="submit"><i className="bi bi-search"></i></button>
                         </form>
-                        <button type="button" className="btn btn-outline-success me-4"> <Link to="/login" className="text-decoration-none text-reset"><i className="bi bi-person-circle" id='usericon'></i> Login</Link></button>
-                        <button type="button" className="btn btn-outline-primary me-4">Sign up</button>
+                        {/* <Link to="./Login"  className="text-decoration-none text-reset"><button type="button" className="btn btn-outline-success me-4"><i className="bi bi-person-circle" id='usericon'></i> Login</button> </Link> */}
+                        <Link to="/Login" className="btn btn-outline-success me-4">
+                            <i className="bi bi-person-circle" id='usericon'></i> Login
+                        </Link>
+                        {/* <button type="button" className="btn btn-outline-success me-4"> <Link to="/Login" className="text-decoration-none text-reset"><i className="bi bi-person-circle" id='usericon'></i> Login</Link></button> */}
+                        <Link to="/Register" className="btn btn-outline-primary me-4">Sign Up </Link>
+                        {/* <button type="button" className="btn btn-outline-primary me-4">Sign up</button> */}
                         <i className="bi bi-bell-fill" id='notification'></i>
                         <i className="bi bi-cart" id='cart'></i>
                     </div>
@@ -497,12 +502,12 @@ const Home = () => {
             {/* Making the footer. */}
             <div className='row justify-content-center text-white mt-5' id='footer'>
                 <div className='col-md-3'>
-                    <img src={logo1} alt='logo' width='150px' className='img-fluid rounded'/>
+                    <img src={logo1} alt='logo' width='150px' className='img-fluid rounded' />
                     <p>The online clothing store for mens, womens and kids. please free to contact us.</p>
                     <h3>Contact Us</h3>
                     <p><i className="bi bi-telephone-fill"></i> Phone no: 9741860177</p>
                     <p><i className="bi bi-geo-alt-fill"></i> Address: Kalanki, Kathmandu</p>
-                    
+
 
                 </div>
                 <div className='col-md-2'>
@@ -534,8 +539,11 @@ const Home = () => {
                     <i className="bi bi-instagram m-3" id='instagram'></i>
                     <i className="bi bi-twitter m-3" id='twitter'></i>
                 </div>
+                <p className=' text-center mt-5'>Copyright @ 2024 -All Right Reserved.</p>
 
             </div>
+
+
 
 
 
