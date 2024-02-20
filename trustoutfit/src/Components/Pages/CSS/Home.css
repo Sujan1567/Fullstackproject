@@ -1,0 +1,124 @@
+.homebar{
+    background-color: beige;
+    padding: 0.5 2%;
+    
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+    color: black;
+    font-size: 18px;
+    padding-left: 25px;
+  }
+#searchbar{
+  /* color: black; */
+  border:0px;
+  border-radius: 0px;
+  position: relative;
+  left: 10px;
+  box-shadow: 5px 5px 11px 0px #00000021 ;
+
+}
+#searchbtn{
+  position: relative;
+  /* z-index: 99; */
+  background-color: rgb(154, 147, 147);
+  color: white;
+  border: 0;
+  border-radius: 0;
+}
+
+#searchform{
+  margin-right: 30px;
+}
+
+#explorebtn{
+  background-color: rgb(245, 186, 75);
+  color: white;
+}
+
+/* Styling the width of the card. */
+.card{
+  width: 20rem;
+}
+
+/* Styling for the caurosel. */
+.carousel-item img {
+  width: 50%; 
+  height: 850px; 
+}
+
+#cart{
+  font-size: 35px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#notification{
+  font-size: 20px;
+  margin-right: 8px;
+  color: rgb(155, 155, 245);
+  cursor: pointer;
+}
+
+#facebook{
+  color:rgb(87, 87, 235);
+  font-size: 25px;
+  cursor: pointer;
+}
+
+#whatsapp{
+  font-size: 25px;
+  color: rgb(90, 224, 90);
+  cursor: pointer;
+}
+
+#instagram{
+  font-size: 25px;
+  color: rgb(105, 22, 107);
+  cursor: pointer;
+}
+
+#twitter{
+  font-size: 25px;
+  color: skyblue;
+  cursor: pointer;
+}
+
+#text{
+  font-size: 18px;
+}
+
+
+#footer{
+  background-color: #343434;
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
+#footer-form{
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+#footer-serach{
+  background-color: #fcc302;
+  color: white;
+  padding: 5px;
+  border: none;
+  position: relative;
+  left: 1px;
+  border-radius: 0;
+   
+
+}
+
+#footer-box{
+  background-color: #00bec9;
+  color: white;
+  padding: 5px;
+  border:0;
+  border-radius: 0;
+}
+
+/* #usericon{
+  font-size: 18px;
+} */
