@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import { StrictMode } from 'react';
 import './index.css';
 import App from './App';
+import Dashboard from './Components/Pages/Panel/Dashboard';
 import { createRoot } from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import Register from './Components/Pages/Register/Register';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
@@ -13,7 +15,7 @@ const root = createRoot(rootElement);
 root.render(
   <StrictMode>
     <BrowserRouter>
-      <App />
+      <App/>
     </BrowserRouter>
   </StrictMode>
 );

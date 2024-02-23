@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Room from '../Images/Room.jpg';
-import './CSS/Login.css';
+import Room from '../../Images/Room.jpg';
+import '../CSS/Login.css';
 import { Link } from 'react-router-dom';
 import validation from './Loginvalidation';
 

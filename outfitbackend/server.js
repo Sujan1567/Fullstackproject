@@ -17,33 +17,43 @@ const db= mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "register"
+    database: "OutfitStack"
 })
 
 //Defining the route to handle POST request to '/Register' endpoint.
-app.post('/register', (req,res)=>{
+app.post('/OutfitStack', (req,res)=>{
+    console.log("request received");
     //Sql query for inserting the data into the login table.
-    const sql= "INSERT INTO login (`name`,`email`,`phonenumber`,`address`,`createpassword`,`confirmpassword`) VALUES (?)";
+    const sql= "INSERT INTO user (`name`,`email`,`phonenumber`,`address`,`password`) VALUES (?)";
    //Array containing the data that must included into the database.
     const values =[
         req.body.name,
         req.body.email,
         req.body.phonenumber,
         req.body.address,
-        req.body.createpassword,
-        req.body.confirmpassword
+        req.body.password
     ]
 
     //IT helps to execute the sql query with the provided values.
     db.query(sql, [values], (err, data)=>{
         if(err){
-            return res.json("Error");
+            res.status(500).json({
+                message: "Internal server error",
+              });
         }
-        return res.json(data);
+        res.status(200).json({
+            message: "Successful valid",
+          });
 
     })
 
 })
+
+//Making the get method.
+app.get("/home",(req,res)=>{
+    res.send("Hello World");
+})
+
 
 
 app.listen(8081, ()=>{

@@ -1,44 +1,44 @@
 import React from 'react'
-import './CSS/Home.css';
-import Logo from '../Images/Logo2.png';
-import logo1 from '../Images/Logo.jpg';
-import backimage from '../Images/Store.jpg';
-import menbrand from '../Images/Menbrand.jpg';
-import womenbrand from '../Images/femalebrand.jpg';
-import kidbrand from '../Images/kidbrand1.jpg';
-import mensit from '../Images/Mensit.jpg';
-import menjeans from '../Images/Menjeans.jpg'
-import Womenjeans from '../Images/Womenjeans.jpg';
-import Redwomen from '../Images/Redwomen.jpg';
-import Kidblue from '../Images/kidblueshirt.jpg';
-import kidcap from '../Images/Kidcap.jpg';
+import '../CSS/Home.css';
+import Logo from '../../Images/Logo2.png';
+import logo1 from '../../Images/Logo.jpg';
+import backimage from '../../Images/Store.jpg';
+import menbrand from '../../Images/Menbrand.jpg';
+import womenbrand from '../../Images/femalebrand.jpg';
+import kidbrand from '../../Images/kidbrand1.jpg';
+import mensit from '../../Images/Mensit.jpg';
+import menjeans from '../../Images/Menjeans.jpg'
+import Womenjeans from '../../Images/Womenjeans.jpg';
+import Redwomen from '../../Images/Redwomen.jpg';
+import Kidblue from '../../Images/kidblueshirt.jpg';
+import kidcap from '../../Images/Kidcap.jpg';
 // import redpantboy from '../Images/redpantBoy.jpg';
 // import whiteshirtmen from '../Images/whiteshirtmen.jpg';
-import pinkjacket from '../Images/eunwoo.jpg';
-import brownjacket from '../Images/brownjacket.jpg';
-import bicycleboy from '../Images/boycycle.jpg';
-import blacksweetshirt from '../Images/blacksweetshirt.jpg';
-import mensjeansjacket from '../Images/mensjeansjacket.jpg';
-import browncoat from '../Images/browncoat.jpg';
-import longcoat from '../Images/girllongcoat.jpg';
-import girlwhitecoat from '../Images/girlwhitecoat.jpg';
-import girlwhiteshirt from '../Images/girlwhiteshirt.jpg';
-import girlwhitepant from '../Images/girlwhitepant.jpg';
-import girlcap from '../Images/Womencap.jpg';
-import girljeansjacket from '../Images/girljeansjacket.jpg';
-import girlshirt from '../Images/girlshirt.jpg';
-import pakistanigirl from '../Images/pakistanilehga.jpg';
-import navycoat from '../Images/navyLongcoatmen.jpg';
-import poloshirt from '../Images/menpolotshirt.jpg';
-import cargopant from '../Images/cargodarkgreen.jpg';
-import tracksuits from '../Images/Trcaksuits.jpg';
-import navyblack from '../Images/poloshirtnavyblack.jpg';
-import longshirtwomen from '../Images/fulltshirtwomen.jpg';
-import blackonepiece from '../Images/blackonepiecewomen.jpg';
-import brideoutfit from '../Images/bridelehanga.jpg';
-import Formalpantswomen from '../Images/Formalpantswomen.jpg';
+import pinkjacket from '../../Images/eunwoo.jpg';
+import brownjacket from '../../Images/brownjacket.jpg';
+import bicycleboy from '../../Images/boycycle.jpg';
+import blacksweetshirt from '../../Images/blacksweetshirt.jpg';
+import mensjeansjacket from '../../Images/mensjeansjacket.jpg';
+import browncoat from '../../Images/browncoat.jpg';
+import longcoat from '../../Images/girllongcoat.jpg';
+import girlwhitecoat from '../../Images/girlwhitecoat.jpg';
+import girlwhiteshirt from '../../Images/girlwhiteshirt.jpg';
+import girlwhitepant from '../../Images/girlwhitepant.jpg';
+import girlcap from '../../Images/Womencap.jpg';
+import girljeansjacket from '../../Images/girljeansjacket.jpg';
+import girlshirt from '../../Images/girlshirt.jpg';
+import pakistanigirl from '../../Images/pakistanilehga.jpg';
+import navycoat from '../../Images/navyLongcoatmen.jpg';
+import poloshirt from '../../Images/menpolotshirt.jpg';
+import cargopant from '../../Images/cargodarkgreen.jpg';
+import tracksuits from '../../Images/Trcaksuits.jpg';
+import navyblack from '../../Images/poloshirtnavyblack.jpg';
+import longshirtwomen from '../../Images/fulltshirtwomen.jpg';
+import blackonepiece from '../../Images/blackonepiecewomen.jpg';
+import brideoutfit from '../../Images/bridelehanga.jpg';
+import Formalpantswomen from '../../Images/Formalpantswomen.jpg';
 // import menblack from '../Images/Menblack.jpg';
-import Login from './Login';
+import Login from '../Login/Login';
 import { Link, NavLink } from 'react-router-dom';
 
 
@@ -531,7 +531,7 @@ const Home = () => {
                     <p>Please enter the valid details.</p>
                     <form id='footer-form'>
                         <input type='text' id='footer-serach' />
-                        <button type='submit' id='footer-box'><i class="bi bi-cursor-fill"></i></button>
+                        <button type='submit' id='footer-box'><i className="bi bi-cursor-fill"></i></button>
                     </form>
                     <h4 className='me-3'>Find us on media</h4>
                     <i className="bi bi-facebook m-3" id='facebook'></i>
