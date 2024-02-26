@@ -3,3 +3,8 @@
     border-radius: 2px rounded;
     box-shadow: 5px 5px 11px 0px #00000021 ;
 }
+
+.center-text {
+    text-align: center;
+    padding-right: 29px;
+}

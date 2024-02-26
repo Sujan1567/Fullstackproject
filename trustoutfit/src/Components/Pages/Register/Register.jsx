@@ -37,7 +37,7 @@ const Register = () => {
         // setErrors(validation(values));
         // if(errors.name === "" && errors.email === "" && errors.phonenumber=== "" && errors.address=== "" && errors.createpassword === "" && errors.confirmpassword=== ""){
         try {
-            const response = await axios.post('http://localhost:8081/OutfitStack', values)
+            const response = await axios.post('http://localhost:8081/register', values)
             const responseStatus = response.status
             if (responseStatus === 200) {
                 console.log("Account created successfully");
@@ -88,7 +88,7 @@ const Register = () => {
                                     </span>
                                     <input type="email" name='email' onChange={handleInput} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                                     {/* Printing the error message for the email address entered by the users. */}
-                                    {/* {errors.email && <span className='text-danger'>{errors.email}</span>}  */}
+                                    {errors.email && <span className='text-danger'>{errors.email}</span>} 
                                 </div>
 
                                 {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
@@ -103,7 +103,7 @@ const Register = () => {
                                     </span>
                                     <input type="tel" name='phonenumber' onChange={handleInput} className="form-control" id="exampleInputphone" aria-describedby="emailHelp" placeholder="Enter phone number" />
                                     {/* Printing the error message for the phone number. */}
-                                    {/* {errors.phonenumber && <span className='text-danger'>{errors.phonenumber}</span>}  */}
+                                    {errors.phonenumber && <span className='text-danger'>{errors.phonenumber}</span>} 
                                 </div>
 
                                 {/* <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div> */}
@@ -157,7 +157,7 @@ const Register = () => {
                             </div>
 
 
-                            <button type="submit" className="btn btn-primary">Register</button>
+                            <button type="submit" className="btn btn-primary col-lg-12 center-text">Register</button>
                             <p className="small mt-2 pt-1 mb-3">Don't have an account? <Link to="/Login" className="link-primary">Login</Link></p>
 
                         </form>
