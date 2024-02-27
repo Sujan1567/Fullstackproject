@@ -1,22 +1,21 @@
 // Importing the express framework for the Node.js
-// import  express  from "express";
 const express = require("express");
-//Importing the mysql database for the interaction with the node.js
-// import mysql from 'mysql';
-const mysql = require("mysql");
-//Importing the Cross-Origin Resource Sharing(CORS) for allowing requests from different origins.
-// import cors from 'jsonwebtoken';
-const cors = require('cors');
-//Importing the jwt.
-// import  jwt  from "jsonwebtoken";
-const jwt = require('jsonwebtoken');
-//Importing the encryption.
-// import bcrypt from 'bcrypt';
-const bcrypt= require('bcrypt');
-//Importing the cookieparser.
-const cookieParser= require('cookie-parser');
 
-// import cookieParser from "cookie-parser";
+//Importing the mysql database for the interaction with the node.js
+const mysql = require("mysql");
+
+//Importing the Cross-Origin Resource Sharing(CORS) for allowing requests from different origins.
+const cors = require('cors');
+
+//Importing the jwt.
+const jwt = require('jsonwebtoken');
+
+//Importing the encryption.
+const bcrypt = require('bcrypt');
+
+//Importing the cookieparser.
+const cookieParser = require('cookie-parser');
+const salt = 10;
 
 
 //Creating the instances of the express application and mounting the CORS middleware for cross-origin requests.
@@ -26,7 +25,7 @@ app.use(express.json());
 app.use(cors(
     {
         origin: ['http://localhost:3000'],
-        methods: ["POST, GET"],
+        methods: ["POST", "GET"],
         credentials: true,
     }
 
@@ -44,67 +43,73 @@ const db = mysql.createConnection({
 })
 
 //Defining the route to handle POST request to '/Register' endpoint.
-app.post('/register', (req, res) => {
+app.post('/Register', (req, res) => {
     console.log("request received");
     //Sql query for inserting the data into the login table.
     const sql = "INSERT INTO user (`name`,`email`,`phonenumber`,`address`,`password`) VALUES (?)";
-    //Array containing the data that must included into the database.
-    const values = [
-        req.body.name,
-        req.body.email,
-        req.body.phonenumber,
-        req.body.address,
-        req.body.password
-    ]
 
-    //IT helps to execute the sql query with the provided values.
-    db.query(sql, [values], (err, data) => {
-        if (err) {
-            res.status(500).json({
-                message: "Internal server error",
-            });
-        }
-        res.status(200).json({
-            message: "Successful valid",
-        });
+    //Password hashing using the bcrpt.
+    bcrypt.hash(req.body.password.toString(), salt, (err, hash) => {
+        if (err) return res.json({ Error: "Error for hashing password" });
+
+        //Array containing the data that must included into the database.
+        const values = [
+            req.body.name,
+            req.body.email,
+            req.body.phonenumber,
+            req.body.address,
+            hash
+        ]
+        //IT helps to execute the sql query with the provided values.
+        db.query(sql, [values], (err, result) => {
+            if (err) return res.json({ Error: "Inserting data error in server" });
+            return res.json({ Status: "Success" });
+
+
+        })
+
 
     })
+
 
 })
 
 
-app.post('/login', (req, res) => {
+app.post('/Login', (req, res) => {
     console.log("request received");
     //Sql query for extracting the data from user table.
-    const sql = "SELECT * FROM user WHERE email= ? AND password =?";
-    //Array containing the data that must included into the database.
-    // const values = [
-    //     req.body.email,
-    //     req.body.password
-    // ]
-    
-    //IT helps to execute the sql query with the provided values.
-    db.query(sql, [req.body.email, req.body.password], (err, data) => {
-        if(err) return res.json({Message: "Server Side Error"});
-        if(data.length >0){
-            const name= data[5].name;
-            const token = jwt.sign({name}, "our-jsonwebtoken-secret-key", {expiresIn: '1d'});
-            res.cookie('token', token);
-            return res.json({Status: "successful login"})
+    const sql = "SELECT * FROM user WHERE email= ? ";
+  
 
-        } else{
-            return res.json({Message: "No Records existed"});
+    //IT helps to execute the sql query with the provided values.
+    
+    db.query(sql, [req.body.email], (err, data) => {
+        //console.log(req.body.email);
+        if (err) return res.json({ Error: "Login error in the server" });
+        //If the email was existed then
+        // If the email exists in the database
+        if (data.length > 0) {
+            bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
+                if (err) return res.json({ Error: "Password hash error" });
+                if (response) {
+                    //Changing for the token.
+                    const name = data[0].name;
+                    const token = jwt.sign({name}, "jwt-secret-key", {expiresIn: '1d'});
+                    res.cookie('token',token );
+
+                    return res.json({ Status: "Success" });
+
+                }else{
+                    return res.json({Error: "Password not matched "});
+
+                }
+            })
+
+        } else {
+            return res.json({ Error: "Email is not existed" });
 
         }
 
-        // if (err) {
-        //     res.status(500).json({
-        //         message: "Internal server error",
-        //     });
-        // }
-        // res.status(200).json({
-        //     message: "Successful valid",
-        // });
 
     })
 
@@ -123,5 +128,5 @@ app.post("/home", (req, res) => {
 
 
 app.listen(8081, () => {
-    console.log("Running");
+    console.log(" Sever is Running");
 })

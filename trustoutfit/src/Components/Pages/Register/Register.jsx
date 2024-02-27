@@ -25,27 +25,37 @@ const Register = () => {
 
 
     //The function for the updating the values of the email address and password.
-    const handleInput = (event) => {
-        setvalues(prev => ({ ...prev, [event.target.name]: [event.target.value] }))
+    // const handleInput = (event) => {
+    //     setvalues(prev => ({ ...prev, [event.target.name]: [event.target.value] }))
 
-    }
+    // }
 
     //The function for event generation while the form is submitted.
-    const handleRegister = async (event) => {
+    const handleRegister =  (event) => {
         event.preventDefault();
+        axios.post('http://localhost:8081/Register', values)
+        .then(res => {
+            if(res.data.Status === "Success"){
+                navigate('/Login')
+            }else{
+                alert("Error");
+            }
+        })
+        .then(err => console.log(err));
 
         // setErrors(validation(values));
         // if(errors.name === "" && errors.email === "" && errors.phonenumber=== "" && errors.address=== "" && errors.createpassword === "" && errors.confirmpassword=== ""){
-        try {
-            const response = await axios.post('http://localhost:8081/register', values)
-            const responseStatus = response.status
-            if (responseStatus === 200) {
-                console.log("Account created successfully");
-                  navigate('/Login');
-            }
-            else {
-                console.log("Server error");
-            }
+        // try {
+        //     const response = await axios.post('http://localhost:8081/Register', values)
+        //     const responseStatus = response.status
+        //     if (responseStatus === 200) {
+        //         console.log("Account created successfully");
+        //           navigate('/Login');
+        //     }
+        //     else {
+        //         alert("Error");
+        //         console.log("Server error");
+        //     }
             //   const data = await response.json();
             //   if(data.error){
             //     console.log("Server error");
@@ -55,9 +65,9 @@ const Register = () => {
             //     //   navigate('/home');
             //   }
 
-        } catch (error) {
-            console.log(error);
-        }
+        // } catch (error) {
+        //     console.log(error);
+        // }
         // }
 
     }
@@ -74,7 +84,7 @@ const Register = () => {
                                     <span className="input-group-text">
                                         <i className="bi bi-person"></i>
                                     </span>
-                                    <input type="text" name='name' onChange={handleInput} className="form-control" id="validationCustom01" placeholder='Enter full name' required />
+                                    <input type="text" name='name' onChange={e=> setvalues({...values, name: e.target.value})} className="form-control" id="validationCustom01" placeholder='Enter full name' required />
                                     {/* Printing the error for the incorrect name entered by the user. */}
                                     {/* {errors.name && <span className='text-danger'>{errors.name}</span>}  */}
                                 </div>
@@ -86,7 +96,7 @@ const Register = () => {
                                     <span className="input-group-text">
                                         <i className="bi bi-envelope-at"></i>
                                     </span>
-                                    <input type="email" name='email' onChange={handleInput} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
+                                    <input type="email" name='email' onChange={e=> setvalues({...values, email: e.target.value})} className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" />
                                     {/* Printing the error message for the email address entered by the users. */}
                                     {errors.email && <span className='text-danger'>{errors.email}</span>} 
                                 </div>
@@ -101,7 +111,7 @@ const Register = () => {
                                     <span className="input-group-text">
                                         <img src={nepal} alt='nepal' className='img-fluid' width="20px" />
                                     </span>
-                                    <input type="tel" name='phonenumber' onChange={handleInput} className="form-control" id="exampleInputphone" aria-describedby="emailHelp" placeholder="Enter phone number" />
+                                    <input type="tel" name='phonenumber' onChange={e=> setvalues({...values, phonenumber: e.target.value})} className="form-control" id="exampleInputphone" aria-describedby="emailHelp" placeholder="Enter phone number" />
                                     {/* Printing the error message for the phone number. */}
                                     {errors.phonenumber && <span className='text-danger'>{errors.phonenumber}</span>} 
                                 </div>
@@ -115,7 +125,7 @@ const Register = () => {
                                     <span className="input-group-text">
                                         <i className="bi bi-house-fill"></i>
                                     </span>
-                                    <input type="text" name='address' onChange={handleInput} className="form-control" id="exampleInputEmail1_address" aria-describedby="emailHelp" placeholder="Enter address" />
+                                    <input type="text" name='address' onChange={e=> setvalues({...values, address: e.target.value})}className="form-control" id="exampleInputEmail1_address" aria-describedby="emailHelp" placeholder="Enter address" />
                                     {/* Printing the error message for the address. */}
                                     {/* {errors.address && <span className='text-danger'>{errors.address}</span>}  */}
                                 </div>
@@ -129,7 +139,7 @@ const Register = () => {
                                     <span className="input-group-text">
                                         <i className="bi bi-eye-fill"></i>
                                     </span>
-                                    <input type="password" name='password' onChange={handleInput} className="form-control" placeholder='Create password' id="exampleInputPassword1_create" />
+                                    <input type="password" name='password' onChange={e=> setvalues({...values, password: e.target.value})}className="form-control" placeholder='Create password' id="exampleInputPassword1_create" />
                                     {/* Printing the error message for the creating the password by the users. */}
                                     {/* {errors.createpassword && <span className='text-danger'>{errors.createpassword}</span>}  */}
 
@@ -143,7 +153,7 @@ const Register = () => {
                                     <span className="input-group-text">
                                         <i className="bi bi-eye-fill"></i>
                                     </span>
-                                    <input type="password" name='confirmpassword' onChange={handleInput} className="form-control" placeholder='Confirm password' id="exampleInputPassword1_confirm" />
+                                    <input type="password" name='confirmpassword'onChange={e=> setvalues({...values, password: e.target.value})} className="form-control" placeholder='Confirm password' id="exampleInputPassword1_confirm" />
                                     {/* Printing the error message for the confirmation of the password entered by the user. */}
                                     {/* {errors.confirmpassword && <span className='text-danger'>{errors.confirmpassword}</span>}  */}
 
