@@ -53,7 +53,12 @@ const Navbar = () => {
                         <Link to="/Register" className="btn btn-outline-primary me-4">Sign Up </Link>
                         {/* <button type="button" className="btn btn-outline-primary me-4">Sign up</button> */}
                         <i className="bi bi-bell-fill" id='notification'></i>
-                        <i className="bi bi-cart" id='cart'></i>
+                        {/* <i className="bi bi-cart" id='cart'></i> */}
+                        <div id='ex4'>
+                            <span className='p1 fa-stack fa-2x has-badge' id="number" data-count={1}>
+                                <i className="bi bi-cart" id='cart'></i>
+                            </span>
+                        </div>
                         {/* <button className='btn btn-outline-warning'> Logout</button> */}
                     </div>
                 </div>

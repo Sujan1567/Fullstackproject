@@ -92,9 +92,11 @@ app.post('/Login', (req, res) => {
             bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
                 if (err) return res.json({ Error: "Password hash error" });
                 if (response) {
-                    //Changing for the token.
+                    //Generating the token.
                     const name = data[0].name;
                     const token = jwt.sign({name}, "jwt-secret-key", {expiresIn: '1d'});
+
+                    //Generating the cookies.
                     res.cookie('token',token );
 
                     return res.json({ Status: "Success" });

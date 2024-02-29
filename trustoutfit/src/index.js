@@ -8,6 +8,7 @@ import { createRoot } from 'react-dom/client';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import Register from './Components/Pages/Register/Register';
+import Malebrand from './Components/Pages/Malebrand/Malebrand';
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
@@ -15,7 +16,7 @@ const root = createRoot(rootElement);
 root.render(
   <StrictMode>
     <BrowserRouter>
-      <App/>
+      <Malebrand/>
     </BrowserRouter>
   </StrictMode>
 );

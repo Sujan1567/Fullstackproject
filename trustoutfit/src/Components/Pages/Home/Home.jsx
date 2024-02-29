@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../CSS/Home.css';
+//import '../CSS/Home.css';
 import Logo from '../../Images/Logo2.png';
 import logo1 from '../../Images/Logo.jpg';
 import backimage from '../../Images/Store.jpg';
@@ -12,8 +12,6 @@ import Womenjeans from '../../Images/Womenjeans.jpg';
 import Redwomen from '../../Images/Redwomen.jpg';
 import Kidblue from '../../Images/kidblueshirt.jpg';
 import kidcap from '../../Images/Kidcap.jpg';
-// import redpantboy from '../Images/redpantBoy.jpg';
-// import whiteshirtmen from '../Images/whiteshirtmen.jpg';
 import pinkjacket from '../../Images/eunwoo.jpg';
 import brownjacket from '../../Images/brownjacket.jpg';
 import bicycleboy from '../../Images/boycycle.jpg';
@@ -42,36 +40,18 @@ import Login from '../Login/Login';
 import { Link, NavLink, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from '../Navbar/Navbar';
+import Footer from '../Footer/Footer';
 
 
 
 
 const Home = () => {
-    //Making the variables who are authorized or not.
-    const [auth, setAuth] = useState(false);
-    const [message, setMessage] = useState('');
-
-    //Using the useEffect hook for checking the one is authorized or not.
-    useEffect(() => {
-        axios.get('/')
-            .then(res => {
-                if (res.data.Status === "Success") {
-                    setAuth(true)
-                    Navigate('/Login')
-                } else {
-                    setAuth(false);
-                    setMessage(res.data.Error);
-
-                }
-
-            })
-            .then(err => console.log(err));
-
-    }, [])
 
     return (
         <>
-          <Navbar/>
+
+            <Navbar />
+
 
             {/* Making the carosel for showing the photo. */}
             <div id="carouselExampleCaptions" className="carousel slide carousel-fade m-5">
@@ -201,69 +181,6 @@ const Home = () => {
             </div>
 
 
-            {/* <div id="carouselExampleCaptions" className="carousel slide carousel-fade m-5">
-                <div className="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 5"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="5" aria-label="Slide 6"></button>
-                </div>
-                <div className="carousel-inner rounded">
-                    <div className="carousel-item active">
-                        <img src={mensit} className="d-block w-100" alt="..." />
-                            <div className="carousel-caption d-none d-md-block">
-                                <h5>First slide label</h5>
-                                <p>Some representative placeholder content for the first slide.</p>
-                            </div>
-                    </div>
-                    <div className="carousel-item">
-                        <img src={menblack} className="d-block w-100" alt="..."/>
-                            <div className="carousel-caption d-none d-md-block">
-                                <h5>Second slide label</h5>
-                                <p>Some representative placeholder content for the second slide.</p>
-                            </div>
-                    </div>
-                    <div className="carousel-item">
-                        <img src={Womenjeans} className="d-block w-100" alt="..."/>
-                            <div className="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
-                            </div>
-                    </div>
-                    <div className="carousel-item">
-                        <img src={Redwomen} className="d-block w-100" alt="..."/>
-                            <div className="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
-                            </div>
-                    </div>
-                    <div className="carousel-item">
-                        <img src={pinkkid} className="d-block w-100" alt="..."/>
-                            <div className="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
-                            </div>
-                    </div>
-                    <div className="carousel-item">
-                        <img src={kidcap} className="d-block w-100" alt="..."/>
-                            <div className="carousel-caption d-none d-md-block">
-                                <h5>Third slide label</h5>
-                                <p>Some representative placeholder content for the third slide.</p>
-                            </div>
-                    </div>
-                </div>
-                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Previous</span>
-                </button>
-                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span className="visually-hidden">Next</span>
-                </button>
-            </div> */}
-
             {/* Making the photo for frame for different fashion accessiors. */}
             <div className='container-fluid mt-5 mb-4'>
                 <h1 className='display-5 text-center mb-4'>Trendy Fashion for Men</h1>
@@ -376,7 +293,7 @@ const Home = () => {
                             <div className="card-body">
                                 <p className="card-text">NavyLong coat</p>
                                 <p>Rs.2000</p>
-                                <p>Add to cart</p>
+                                <button type='button' className='btn btn-warning rounded text-white'>Add to cart</button>
                             </div>
                         </div>
 
@@ -388,7 +305,7 @@ const Home = () => {
                             <div className="card-body">
                                 <p className="card-text">Polo T-shirt</p>
                                 <p>Rs.2000</p>
-                                <p>Add to cart</p>
+                                <button type='button' className='btn btn-warning rounded text-white'>Add to cart</button>
                             </div>
                         </div>
 
@@ -400,7 +317,7 @@ const Home = () => {
                             <div className="card-body">
                                 <p className="card-text">Cargo pants</p>
                                 <p>Rs.2000</p>
-                                <p>Add to cart</p>
+                                <button type='button' className='btn btn-warning rounded text-white'>Add to cart</button>
                             </div>
                         </div>
 
@@ -412,7 +329,7 @@ const Home = () => {
                             <div className="card-body">
                                 <p className="card-text">Track suits</p>
                                 <p>Rs.2000</p>
-                                <p>Add to cart</p>
+                                <button type='button' className='btn btn-warning rounded text-white'>Add to cart</button>
                             </div>
                         </div>
 
@@ -427,7 +344,7 @@ const Home = () => {
                             <div className="card-body">
                                 <p className="card-text">Full-sleeve Polo T-shirt</p>
                                 <p>Rs.1500</p>
-                                <p>Add to cart</p>
+                                <button type='button' className='btn btn-warning rounded text-white'>Add to cart</button>
                             </div>
                         </div>
 
@@ -439,7 +356,7 @@ const Home = () => {
                             <div className="card-body">
                                 <p className="card-text">black one-pieces</p>
                                 <p>Rs.5000</p>
-                                <p>Add to cart</p>
+                                <button type='button' className='btn btn-warning rounded text-white'>Add to cart</button>
                             </div>
                         </div>
 
@@ -451,7 +368,7 @@ const Home = () => {
                             <div className="card-body">
                                 <p className="card-text">bridal Lehanga</p>
                                 <p>Rs.10000</p>
-                                <p>Add to cart</p>
+                                <button type='button' className='btn btn-warning rounded text-white'>Add to cart</button>
                             </div>
                         </div>
 
@@ -463,7 +380,7 @@ const Home = () => {
                             <div className="card-body">
                                 <p className="card-text">Formal white pants</p>
                                 <p>Rs.2000</p>
-                                <p>Add to cart</p>
+                                <button type='button' className='btn btn-warning rounded text-white'>Add to cart</button>
                             </div>
                         </div>
 
@@ -474,82 +391,10 @@ const Home = () => {
 
             </div>
 
-            {/* Making the footer. */}
-            <div className='row justify-content-center text-white mt-5' id='footer'>
-                <div className='col-md-3'>
-                    <img src={logo1} alt='logo' width='150px' className='img-fluid rounded' />
-                    <p>The online clothing store for mens, womens and kids. please free to contact us.</p>
-                    <h3>Contact Us</h3>
-                    <p><i className="bi bi-telephone-fill"></i> Phone no: 9741860177</p>
-                    <p><i className="bi bi-geo-alt-fill"></i> Address: Kalanki, Kathmandu</p>
+            {/* Calling the Footer components. */}
+            <Footer/>
 
-
-                </div>
-                <div className='col-md-2'>
-                    <h3>About</h3>
-                    <p>History</p>
-                    <p>Our team</p>
-                    <p>Brand guidelines</p>
-                    <p>Terms &Condition</p>
-                    <p>Privacy Policy</p>
-                </div>
-                <div className='col-md-2'>
-                    <h3>Services</h3>
-                    <p>How to order</p>
-                    <p>Our Product</p>
-                    <p>Order status</p>
-                    <p>Promo</p>
-                    <p>Payment method</p>
-                </div>
-                <div className='col-md-3 text-end'>
-                    <h3>Title Here</h3>
-                    <p>Please enter the valid details.</p>
-                    <form id='footer-form'>
-                        <input type='text' id='footer-serach' />
-                        <button type='submit' id='footer-box'><i className="bi bi-cursor-fill"></i></button>
-                    </form>
-                    <h4 className='me-3'>Find us on media</h4>
-                    <i className="bi bi-facebook m-3" id='facebook'></i>
-                    <i className="bi bi-whatsapp m-3" id='whatsapp'></i>
-                    <i className="bi bi-instagram m-3" id='instagram'></i>
-                    <i className="bi bi-twitter m-3" id='twitter'></i>
-                </div>
-                <p className=' text-center mt-5'>Copyright @ 2024 -All Right Reserved.</p>
-
-            </div>
-
-
-
-
-
-
-            {/* <div className='container-fluid mt-4'>
-                <div className='row justify-content-center'>
-                    <div className='col-md-4'>
-                        <h1 className='display-6 mb-4'>Find us On Social Media</h1>
-                        <i className="bi bi-facebook m-3" id='facebook'></i>
-                        <i className="bi bi-whatsapp m-3" id='whatsapp'></i>
-                        <i className="bi bi-instagram m-3" id='instagram'></i>
-                        <i className="bi bi-twitter m-3" id='twitter'></i>
-
-                    </div>
-
-                    <div className='col-md-6'>
-                        <h2 className='display-6'>Address</h2>
-                        <p>Kalanki, Kathmadu</p>
-                        <p><i className="bi bi-telephone-fill"></i> Phone no: 9741860177</p>
-                        <iframe className='rounded' src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3532.753039780123!2d85.28197717492262!3d27.694026776079845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb18650ae1f9fd%3A0xf9990626ca549048!2sShree%20Kalanki%20Mai%20Temple!5e0!3m2!1sen!2snp!4v1707998730581!5m2!1sen!2snp" width="600" height="450" style={{ border: "0" }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
-
-                </div>
-
-            </div> */}
-
-
-
-
-
-
+           
         </>
     )
 }
