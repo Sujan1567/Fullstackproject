@@ -1,2 +1,10 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Poppins&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&display=swap') */
+#Rating{
+    background-color: rgb(164, 164, 253);
+    border-radius: 5px;
+    padding: 2px;
+}
+#Cardbutton{
+    color: rgb(163, 163, 246);
 
+}
