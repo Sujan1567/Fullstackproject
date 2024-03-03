@@ -2,10 +2,40 @@ import React from 'react'
 import '../CSS/Cartstyle.css'
 import Navbar from '../Navbar/Navbar'
 import bluehoodie from '../../Images/Bluehoodiemen.jpg';
+import { useDispatch, useSelector } from 'react-redux';
+import { addToCart , removeToCart, removeSingleIteams, emptyCartIteam } from '../../../redux/features/Cartslice';
 
 const CartDetails = () => {
+  const { carts } = useSelector((state) => state.allcart);
   //Creating the array.
-  const arr = [0, 1]
+  console.log(carts);
+  
+  const dispatch = useDispatch();
+
+  //Add to cart
+  const handleIncrement = (e) =>{
+    dispatch(addToCart(e))
+
+  }
+
+  //Remove to Cart
+  const handledecrement = (e) =>{
+    dispatch(removeToCart(e))
+
+  }
+
+  //Remove the Single items
+  const handleSingleDecrement = (e) =>{
+    dispatch(removeSingleIteams(e))
+
+  }
+
+  //Empty cart
+  const emptycart = () =>{
+    dispatch(emptyCartIteam())
+  }
+
+ 
   return (
     <>
       <Navbar />
@@ -16,17 +46,17 @@ const CartDetails = () => {
             <div className="card w-100">
               <div className="card-header bg-dark p-3">
                 <div className='d-flex justify-content-between align-items-center'>
-                  <h5 className=' text-white m-0'>Cart calculation(1)</h5>
+                  <h5 className=' text-white m-0'>Cart calculation{carts.length >0 ? `(${carts.length})`: ""}</h5>
 
                   {
-                    arr.length > 0 ? <button className='btn btn-danger mt-0 btn-sm '><i className="bi bi-trash3"></i><span>Empty Cart</span></button> : ""
+                    carts.length > 0 ? <button className='btn btn-danger mt-0 btn-sm 'onClick={emptycart}><i className="bi bi-trash3" ></i><span>Empty Cart</span></button> : ""
                   }
 
                 </div>
               </div>
               <div className="card-body p-0">
                 {
-                  arr.length === 0 ? <table className="table mb-0">
+                  carts.length === 0 ? <table className="table mb-0">
                     {/* <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -64,21 +94,21 @@ const CartDetails = () => {
                     </thead>
                     <tbody>
                       {
-                        arr.map((data, index) => {
+                      carts.map((data, index) => {
                           return (
                             <>
                               <tr>
-                                <td><button id='deleteactionicon' className='btn btn-danger'><i className="bi bi-trash3"></i></button></td>
-                                <td><div className='imagerow'><img className='img-fluid rounded' src={bluehoodie} width="40px" /></div></td>
-                                <td><div><p>Blue hoodie</p></div></td>
-                                <td>3000</td>
+                                <td><button id='deleteactionicon' className='btn btn-danger' onClick={()=> handledecrement(data.id)}><i className="bi bi-trash3"></i></button></td>
+                                <td><div className='imagerow'><img className='img-fluid rounded' src={data.image} width="40px" /></div></td>
+                                <td><div><p>{data.name}</p></div></td>
+                                <td>{data.Price}</td>
                                 <td>
                                   <div className='input-group GroupInput'>
-                                    <button type='button' className="btn btn-outline-success" id='Quantitybutton'>
+                                    <button type='button' className="btn btn-outline-success" id='Quantitybutton' onClick={data.quantity <=1 ?() => handledecrement(data.id) : () => handleSingleDecrement(data)}>
                                       <i class="bi bi-dash" id='minus'></i>
                                     </button>
-                                    <input type='text' className='form-control ControlForm' name='' id=''></input>
-                                    <button  type='button' className="btn btn-outline-success">
+                                    <input type='text' className='form-control ControlForm' value={data.quantity} name='' id=''></input>
+                                    <button  type='button' className="btn btn-outline-success" onClick={()=> handleIncrement(data)}>
                                       <i class="bi bi-plus"></i>
 
                                     </button>
@@ -87,7 +117,7 @@ const CartDetails = () => {
                                   </div>
 
                                 </td>
-                                <td className='text-end'>400</td>
+                                <td className='text-end'>{data.quantity * data.Price}</td>
 
                               </tr>
 

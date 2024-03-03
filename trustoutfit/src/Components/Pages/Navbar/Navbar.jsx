@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import '../CSS/Home.css';
 import Logo from '../../Images/Logo2.png';
 
@@ -6,13 +6,15 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {
-    const {carts} = useSelector((state)=>state.allcart);
-   
+    const { carts } = useSelector((state) => state.allcart);
+
     return (
         <>
             <nav className="navbar navbar-expand-lg  navbar-dark homebar">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="#"><img src={Logo} className='img-fluid rounded' width="160px" /></a>
+                    <NavLink to="/">
+                        <a className="navbar-brand" href="#"><img src={Logo} className='img-fluid rounded' width="160px" /></a>
+                    </NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -57,11 +59,13 @@ const Navbar = () => {
                         {/* <button type="button" className="btn btn-outline-primary me-4">Sign up</button> */}
                         <i className="bi bi-bell-fill" id='notification'></i>
                         {/* <i className="bi bi-cart" id='cart'></i> */}
-                        <div id='ex4'>
-                            <span className='p1 fa-stack fa-2x has-badge' id="number" data-count={carts.length}>
-                                <i className="bi bi-cart" id='cart'></i>
-                            </span>
-                        </div>
+                        <NavLink to="/CartDetails" className="text-decoration-none mx-2">
+                            <div id='ex4'>
+                                <span className='p1 fa-stack fa-2x has-badge' id="number" data-count={carts.length}>
+                                    <i className="bi bi-cart" id='cart'></i>
+                                </span>
+                            </div>
+                        </NavLink>
                         {/* <button className='btn btn-outline-warning'> Logout</button> */}
                     </div>
                 </div>

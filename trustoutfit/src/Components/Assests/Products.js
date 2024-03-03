@@ -14,7 +14,8 @@ let products=[
         category:"men",
         image: Bluehoodie,
         Rating:"3.4",
-        Price: 2000
+        Price: 2000,
+        quantity: 0
 
 
     },
@@ -24,7 +25,8 @@ let products=[
         category:"men",
         image: blackjeans,
         Rating:"4",
-        Price: 3000
+        Price: 3000,
+        quantity: 0
 
         
     },
@@ -34,7 +36,8 @@ let products=[
         category:"men",
         image: grayhalfshirt,
         Rating:"4",
-        Price: 3000
+        Price: 2500,
+        quantity: 0
 
     },
     {
@@ -43,7 +46,8 @@ let products=[
         category:"men",
         image: formalpants,
         Rating:"4.5",
-        Price: 4000
+        Price: 4000,
+        quantity: 0
 
     },
     {
@@ -52,7 +56,8 @@ let products=[
         category:"men",
         image: Mendenimpants,
         Rating:"3",
-        Price: 5000
+        Price: 5000,
+        quantity: 0
 
     },
     {
@@ -61,7 +66,8 @@ let products=[
         category:"men",
         image: Mencheckpants,
         Rating:"4",
-        Price: 2500
+        Price: 2500,
+        quantity: 0
 
     },
     {
@@ -70,7 +76,8 @@ let products=[
         category:"men",
         image: Whitesneaker,
         Rating:"3.5",
-        Price: 6000
+        Price: 6000,
+        quantity: 0
 
     },
     {
@@ -79,7 +86,8 @@ let products=[
         category:"men",
         image: Blackshoe,
         Rating:"4.5",
-        Price: 3500
+        Price: 3500,
+        quantity: 0
 
     },
 
@@ -89,7 +97,8 @@ let products=[
         category:"men",
         image: Brownsneaker,
         Rating:"5",
-        Price: 4000
+        Price: 4000,
+        quantity: 0
 
 
     }
