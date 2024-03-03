@@ -10,13 +10,20 @@ import { BrowserRouter } from 'react-router-dom';
 import Register from './Components/Pages/Register/Register';
 import Malebrand from './Components/Pages/Malebrand/Malebrand';
 
+//Importing the provider and store for the App components.
+import { Provider } from 'react-redux';
+import { store } from './redux/app/store';
+
+
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
     <BrowserRouter>
-      <App/>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </StrictMode>
 );

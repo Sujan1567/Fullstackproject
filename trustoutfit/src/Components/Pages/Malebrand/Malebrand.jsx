@@ -5,9 +5,20 @@ import bluehoodie from '../../Images/Bluehoodiemen.jpg';
 import blackjeans from '../../Images/Blackjeansjacketmen.jpg';
 import Grayhalfshirt from '../../Images/Grayhalfshirtmen.jpg';
 import products from '../../Assests/Products';
+import { addToCart } from '../../../redux/features/Cartslice';
+import { useDispatch } from 'react-redux';
 
 const Malebrand = () => {
     const [cartData, setCartData] = useState(products);
+    //Sending the data to the addToCart function.
+    const dispatch = useDispatch();
+
+    //Add to cart.
+    const send = (e) =>{
+        dispatch(addToCart(e));
+
+    }
+
 
 
     return (
@@ -34,7 +45,7 @@ const Malebrand = () => {
                                                     <span>{element.Price}</span>
                                                 </div>
                                                 <hr />
-                                                <a href="#" className="btn btn-info text-white" id='Cartbutton'>Add to cart</a>
+                                                <button  className="btn btn-info text-white" id='Cartbutton' onClick={()=> send(element)}>Add to cart</button>
                                             </div>
                                         </div>
 

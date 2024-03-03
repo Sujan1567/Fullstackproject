@@ -22,18 +22,13 @@
     height: 20px;
   }
 
-  .Quantitycount{
-    height: 40px; 
-    width: 35px;
-    border-radius: 4px;
 
-  }
-  .input-group{
+  .GroupInput{
     width: 135px; 
     height: 40px;
 
   }
-  .form-control{
+  .ControlForm{
     border: 2px solid rgb(113, 110, 110);
   }
 

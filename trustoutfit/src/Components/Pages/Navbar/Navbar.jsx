@@ -3,8 +3,11 @@ import '../CSS/Home.css';
 import Logo from '../../Images/Logo2.png';
 
 import React from 'react'
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+    const {carts} = useSelector((state)=>state.allcart);
+   
     return (
         <>
             <nav className="navbar navbar-expand-lg  navbar-dark homebar">
@@ -55,7 +58,7 @@ const Navbar = () => {
                         <i className="bi bi-bell-fill" id='notification'></i>
                         {/* <i className="bi bi-cart" id='cart'></i> */}
                         <div id='ex4'>
-                            <span className='p1 fa-stack fa-2x has-badge' id="number" data-count={1}>
+                            <span className='p1 fa-stack fa-2x has-badge' id="number" data-count={carts.length}>
                                 <i className="bi bi-cart" id='cart'></i>
                             </span>
                         </div>

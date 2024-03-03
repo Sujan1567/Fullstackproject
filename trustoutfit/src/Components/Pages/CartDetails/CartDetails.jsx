@@ -73,11 +73,11 @@ const CartDetails = () => {
                                 <td><div><p>Blue hoodie</p></div></td>
                                 <td>3000</td>
                                 <td>
-                                  <div className='input-group'>
+                                  <div className='input-group GroupInput'>
                                     <button type='button' className="btn btn-outline-success" id='Quantitybutton'>
                                       <i class="bi bi-dash" id='minus'></i>
                                     </button>
-                                    <input type='text' className='form-control' name='' id=''></input>
+                                    <input type='text' className='form-control ControlForm' name='' id=''></input>
                                     <button  type='button' className="btn btn-outline-success">
                                       <i class="bi bi-plus"></i>
 
