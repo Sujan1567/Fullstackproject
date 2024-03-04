@@ -2,14 +2,53 @@ import { Link, NavLink } from 'react-router-dom';
 import '../CSS/Home.css';
 import Logo from '../../Images/Logo2.png';
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const Navbar = () => {
     const { carts } = useSelector((state) => state.allcart);
 
+    const [auth, setAuth] = useState(false);
+    // const [message, setMessage] = useState('');
+    const [name, setName] = useState('');
+
+    axios.defaults.withCredentials = true;
+
+    useEffect(() => {
+        axios.get('http://localhost:8081')
+            .then(res => {
+                if (res.data.Status === "Success") {
+                    setAuth(true)
+                    setName(res.data.name)
+
+                } else {
+                    setAuth(false)
+
+                }
+            })
+            .then(err => console.log(err));
+
+    }, [])
+
+    const handledelete = () => {
+        axios.get('http://localhost:8081/logout')
+            .then(res => {
+                window.location.reload(true);
+                // setAuth(false);
+                // setName(''); 
+
+            }).catch(err => console.log(err));
+
+
+    }
+
+
+
+
     return (
         <>
+
             <nav className="navbar navbar-expand-lg  navbar-dark homebar">
                 <div className="container-fluid">
                     <NavLink to="/">
@@ -50,12 +89,28 @@ const Navbar = () => {
                             <input className="form-control me-2" id='searchbar' type="search" placeholder="Search products" aria-label="Search" />
                             <button className="btn btn-outline-success" id='searchbtn' type="submit"><i className="bi bi-search"></i></button>
                         </form>
-                        {/* <Link to="./Login"  className="text-decoration-none text-reset"><button type="button" className="btn btn-outline-success me-4"><i className="bi bi-person-circle" id='usericon'></i> Login</button> </Link> */}
-                        <Link to="/Login" className="btn btn-outline-success me-4">
-                            <i className="bi bi-person-circle" id='usericon'></i> Login
-                        </Link>
-                        {/* <button type="button" className="btn btn-outline-success me-4"> <Link to="/Login" className="text-decoration-none text-reset"><i className="bi bi-person-circle" id='usericon'></i> Login</Link></button> */}
-                        <Link to="/Register" className="btn btn-outline-primary me-4">Sign Up </Link>
+
+
+                        {
+                            auth ?
+                                <div className='d-flex align-items-center'>
+                                    <button className='btn btn-outline me-4'> <i className="bi bi-person-circle" id='usericonlogout'></i><span id='Username' className='m-1'>{name}</span></button>
+                                    <button type='button' className='btn btn-outline-warning  me-4' onClick={handledelete}>Logout</button>
+
+                                </div>
+                                :
+                                <div>
+
+                                    {/* <Link to="./Login"  className="text-decoration-none text-reset"><button type="button" className="btn btn-outline-success me-4"><i className="bi bi-person-circle" id='usericon'></i> Login</button> </Link> */}
+                                    <Link to="/Login" className="btn btn-outline-success me-4">
+                                        <i className="bi bi-person-circle" id='usericon'></i> Login
+                                    </Link>
+                                    {/* <button type="button" className="btn btn-outline-success me-4"> <Link to="/Login" className="text-decoration-none text-reset"><i className="bi bi-person-circle" id='usericon'></i> Login</Link></button> */}
+                                    <Link to="/Register" className="btn btn-outline-primary me-4">Sign Up </Link>
+                                </div>
+                        }
+
+
                         {/* <button type="button" className="btn btn-outline-primary me-4">Sign up</button> */}
                         <i className="bi bi-bell-fill" id='notification'></i>
                         {/* <i className="bi bi-cart" id='cart'></i> */}

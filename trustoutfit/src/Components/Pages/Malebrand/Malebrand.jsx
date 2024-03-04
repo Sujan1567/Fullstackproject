@@ -7,15 +7,19 @@ import Grayhalfshirt from '../../Images/Grayhalfshirtmen.jpg';
 import products from '../../Assests/Products';
 import { addToCart } from '../../../redux/features/Cartslice';
 import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
 
 const Malebrand = () => {
     const [cartData, setCartData] = useState(products);
+
+   
     //Sending the data to the addToCart function.
     const dispatch = useDispatch();
 
     //Add to cart.
     const send = (e) =>{
         dispatch(addToCart(e));
+        toast.success("Item is added successfully in cart");
 
     }
 

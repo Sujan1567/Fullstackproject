@@ -20,13 +20,14 @@ const Login = () => {
     const navigate = useNavigate();
     //For generating the token.
      axios.defaults.withCredentials = true;
+
     const handleLogin =  (event) => {
         event.preventDefault();
         //calling the API to get the data.
         axios.post('http://localhost:8081/Login', Values)
         .then(res=> {
             if(res.data.Status === "Success"){
-                navigate("/")
+                navigate("/welcome")
             }else{
                 alert(res.data.Error);
             }

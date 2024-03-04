@@ -1,14 +1,21 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../CSS/Cartstyle.css'
 import Navbar from '../Navbar/Navbar'
 import bluehoodie from '../../Images/Bluehoodiemen.jpg';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCart , removeToCart, removeSingleIteams, emptyCartIteam } from '../../../redux/features/Cartslice';
+import toast from 'react-hot-toast';
 
 const CartDetails = () => {
   const { carts } = useSelector((state) => state.allcart);
   //Creating the array.
-  console.log(carts);
+
+  //Calculating the total prices.
+  const [totalprice, setPrice] = useState(0);
+
+  //Calculating the total number of the quantity.
+  const [totalquantity, setTotalquantity] = useState(0);
+
   
   const dispatch = useDispatch();
 
@@ -20,7 +27,8 @@ const CartDetails = () => {
 
   //Remove to Cart
   const handledecrement = (e) =>{
-    dispatch(removeToCart(e))
+    dispatch(removeToCart(e));
+    toast.success("Item Remove from cart");
 
   }
 
@@ -32,8 +40,45 @@ const CartDetails = () => {
 
   //Empty cart
   const emptycart = () =>{
-    dispatch(emptyCartIteam())
+    dispatch(emptyCartIteam());
+    toast.success("Your cart is empty");
   }
+
+ //Counting the total prices.
+ const total = () =>{
+  let totalprice = 0;
+  carts.map((ele, ind) =>{
+    totalprice = ele.Price * ele.quantity + totalprice
+
+  });
+  setPrice(totalprice)
+
+ }
+
+ //Counting the total number of the quantity.
+ const countquantity = () =>{
+  let totalquantity = 0;
+  carts.map((ele, ind) =>{
+    totalquantity = ele.quantity + totalquantity
+
+  });
+  setTotalquantity(totalquantity)
+
+ }
+
+//This is the useeffect for the Total number of the prices.
+ useEffect(() =>{
+  total()
+
+ }, [total])
+
+
+ //This is useeffect for the Total number of quantity present in the cart.
+ useEffect(() =>{
+  countquantity()
+
+ }, [countquantity])
+
 
  
   return (
@@ -134,8 +179,8 @@ const CartDetails = () => {
                       <tr>
                         <th>&nbsp;</th>
                         <th colSpan={3}>&nbsp;</th>
-                        <th>Items In cart<span className='ml-2 mr-2'> : </span><span className='text-danger'>4</span></th>
-                        <th className='text-end'>Total prices<span className='ml-2 mr-2'> : </span><span className='text-danger'>400</span></th>
+                        <th>Items In cart<span className='ml-2 mr-2'> : </span><span className='text-danger'>{totalquantity}</span></th>
+                        <th className='text-end'>Total prices<span className='ml-2 mr-2'> : </span><span className='text-danger'>{totalprice}</span></th>
 
                       </tr>
 

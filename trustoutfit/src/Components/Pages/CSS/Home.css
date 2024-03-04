@@ -143,5 +143,17 @@
 }
 
 
+#logoutbtn{
+  background-color: rgb(174, 174, 248);
+}
+
+#usericonlogout{
+  font-size: 27px;
+  color: rgb(254, 166, 78);
+}
+#Username{
+  font-size: 18px;
+  color:rgb(254, 166, 78)
+}
 
 

@@ -46,7 +46,7 @@ const db = mysql.createConnection({
 app.post('/Register', (req, res) => {
     console.log("request received");
     //Sql query for inserting the data into the login table.
-    const sql = "INSERT INTO user (`name`,`email`,`phonenumber`,`address`,`password`) VALUES (?)";
+    const sql = "INSERT INTO user (`name`,`email`,`phonenumber`,`address`,`role`,`password`) VALUES (?)";
 
     //Password hashing using the bcrpt.
     bcrypt.hash(req.body.password.toString(), salt, (err, hash) => {
@@ -58,6 +58,7 @@ app.post('/Register', (req, res) => {
             req.body.email,
             req.body.phonenumber,
             req.body.address,
+            req.body.role,
             hash
         ]
         //IT helps to execute the sql query with the provided values.
@@ -79,10 +80,10 @@ app.post('/Login', (req, res) => {
     console.log("request received");
     //Sql query for extracting the data from user table.
     const sql = "SELECT * FROM user WHERE email= ? ";
-  
+
 
     //IT helps to execute the sql query with the provided values.
-    
+
     db.query(sql, [req.body.email], (err, data) => {
         //console.log(req.body.email);
         if (err) return res.json({ Error: "Login error in the server" });
@@ -94,15 +95,15 @@ app.post('/Login', (req, res) => {
                 if (response) {
                     //Generating the token.
                     const name = data[0].name;
-                    const token = jwt.sign({name}, "jwt-secret-key", {expiresIn: '1d'});
+                    const token = jwt.sign({ name }, "jwt-secret-key", { expiresIn: '1d' });
 
                     //Generating the cookies.
-                    res.cookie('token',token );
+                    res.cookie('token', token);
 
                     return res.json({ Status: "Success" });
 
-                }else{
-                    return res.json({Error: "Password not matched "});
+                } else {
+                    return res.json({ Error: "Password not matched " });
 
                 }
             })
@@ -115,6 +116,41 @@ app.post('/Login', (req, res) => {
 
     })
 
+})
+
+//creating the function for verfiying the user.
+const verifyuser = (req, res, next) => {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.json({ Error: "You are not authenticated" });
+    }
+    else {
+        jwt.verify(token, "jwt-secret-key", (err, decoded) => {
+            if (err) {
+                return res.json({ Error: "Token is not corrected" });
+
+            }else{
+                req.name = decoded.name;
+                next();
+            }
+        })
+
+
+    }
+
+}
+
+
+//Creating the practising the routes for authorization of the user.
+app.get("/", verifyuser, (req, res) => {
+    return res.json({Status: "Success", name: req.name});
+
+})
+
+//creating the practise API for logout.
+app.get("/logout", (req,res) =>{
+    res.clearCookie("token");
+    return res.json({Status: "Success"});
 })
 
 
