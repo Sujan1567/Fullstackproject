@@ -93,9 +93,18 @@ app.post('/Login', (req, res) => {
             bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
                 if (err) return res.json({ Error: "Password hash error" });
                 if (response) {
-                    //Generating the token.
+                    //Generating the token with the help of the name.
                     const name = data[0].name;
+
+                    //Generating the token with the help of the role of the user.
+                    const role = data[0].role;
+
+                    //This is for the name.
                     const token = jwt.sign({ name }, "jwt-secret-key", { expiresIn: '1d' });
+
+                    //This is one for the role.
+                    // const token = jwt.sign({ role }, "jwt-secret-key", { expiresIn: '1d' });
+
 
                     //Generating the cookies.
                     res.cookie('token', token);
@@ -140,10 +149,39 @@ const verifyuser = (req, res, next) => {
 
 }
 
-
-//Creating the practising the routes for authorization of the user.
 app.get("/", verifyuser, (req, res) => {
     return res.json({Status: "Success", name: req.name});
+   
+
+})
+
+// This is function for verfying the role.
+const verifyrole = (req, res, next) => {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.json({ Error: "You are not authenticated" });
+    }
+    else {
+        jwt.verify(token, "jwt-secret-key", (err, decoded) => {
+            if (err) {
+                return res.json({ Error: "Token is not corrected" });
+
+            }else{
+                req.role = decoded.role;
+                next();
+            }
+        })
+
+
+    }
+
+}
+
+
+//Creating the practising the routes for authorization of the user.
+app.get("/", verifyrole, (req, res) => {
+
+    return res.json({Status: "Success", role: req.role});
 
 })
 
