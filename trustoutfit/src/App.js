@@ -9,6 +9,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import Welcome from "./Components/Pages/Practises/Welcome";
 import Products from "./Components/Pages/AdminPanel/Products";
+import Summary from "./Components/Pages/AdminPanel/Summary";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
         {/* Performing the nested routing for the admin panel. */}
         <Route path="/dashboard" element={<Dashboard />}>
           <Route path="products" element={<Products/>} />
+          <Route path="summary" element={<Summary/>} />
 
         </Route>
       </Routes>

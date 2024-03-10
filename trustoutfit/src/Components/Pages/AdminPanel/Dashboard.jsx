@@ -1,11 +1,60 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Logo from '../../Images/Logo2.png';
 import { NavLink } from 'react-router-dom';
 import bicycle from '../../Images/boycycle.jpg';
-import '../CSS/Dashboard.css'
+import '../CSS/Dashboard.css';
+import Orders from './order';
 
 
 const Dashboard = () => {
+  //Fill the order in the table.
+  // Orders.forEach(order =>{
+  //   const tr =document.createElement('tr');
+  //   const trContent = `
+  //   <td>${order. productName}</td>
+  //   <td>${order. Number}<</td>
+  //   <td>${order.paymentstatus}<</td>
+  //   <td className="${order.shipping === 'Declined' ? 'danger' : order.shipping ==='pending' ?  'warning' : 'primary'}">${order.shipping}</td>
+  //   <td classname="text-primary">Details</td>
+  //   `;
+  //   tr.innerHTML = trContent;
+  //   document.querySelector('table tbody').appendChild(tr);
+
+  // })
+  useEffect(() => {
+    const sideMenu = document.querySelector("aside");
+    const menuBtn = document.querySelector("#menu-btn");
+    const closeBtn = document.querySelector("#close-btn");
+    const themeToggler = document.querySelector(".theme-toggler");
+
+    const handleMenuButtonClick = () => {
+      sideMenu.style.display = 'block';
+    };
+
+    const handleCloseButtonClick = () => {
+      sideMenu.style.display = 'none';
+    };
+
+    const handleThemeToggleClick = () => {
+      document.body.classList.toggle('dark-theme-variables');
+      themeToggler.querySelector('span:nth-child(1)').classList.toggle('active');
+      themeToggler.querySelector('span:nth-child(2)').classList.toggle('active');
+    };
+
+    // Add event listeners
+    menuBtn.addEventListener('click', handleMenuButtonClick);
+    closeBtn.addEventListener('click', handleCloseButtonClick);
+    themeToggler.addEventListener('click', handleThemeToggleClick);
+
+    // Remove event listeners on cleanup
+    return () => {
+      menuBtn.removeEventListener('click', handleMenuButtonClick);
+      closeBtn.removeEventListener('click', handleCloseButtonClick);
+      themeToggler.removeEventListener('click', handleThemeToggleClick);
+    };
+  }, []); // Empty dependency array ensures this effect runs only once after initial render
+
+ 
   return (
     <>
       <div className='container'>
@@ -52,10 +101,10 @@ const Dashboard = () => {
               <span className='message-count'>21</span>
             </a>
 
-            <a href="#" id='decor'>
+            <NavLink to="/dashboard/products" id='decor'>
               <span className='material-icons-sharp'>inventory</span>
               <h3>Products</h3>
-            </a>
+            </NavLink>
 
             <a href="#" id='decor'>
               <span className='material-icons-sharp'>report_gmailerrorred</span>
@@ -379,6 +428,8 @@ const Dashboard = () => {
         </div>
 
       </div>
+
+      
 
 
 
