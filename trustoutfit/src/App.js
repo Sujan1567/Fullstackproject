@@ -29,7 +29,7 @@ function App() {
 
         {/* Performing the nested routing for the admin panel. */}
         <Route path="/dashboard" element={<Panel />}>
-          <Route path="Updateproduct" element={<UpdateProduct />} />
+          <Route path="Updateproduct/:ProductID" element={<UpdateProduct />} />
           <Route path="addproduct" element={<AddProduct />} />
           <Route path="products" element={<Products />} >
             <Route path="create-product" element={<CreateProduct />} />

@@ -48,7 +48,7 @@ const CreateProduct = () => {
 
                         <div className="d-flex flex-column">
                             <button className='btn btn-danger mb-2' onClick={() => handleDelete(product.ProductID)}>Delete</button>
-                            <button className='btn btn-info'>Update</button>
+                            <button className='btn btn-info'><Link to={`/dashboard/Updateproduct/${product.ProductID}`} className='text-white' style={{ textDecoration: "none" }}>Update</Link></button>
                         </div>
 
 

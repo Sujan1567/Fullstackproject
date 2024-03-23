@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(cors(
     {
         origin: ['http://localhost:3000'],
-        methods: ["POST", "GET", "DELETE"],
+        methods: ["POST", "GET", "DELETE", "PUT"],
         credentials: true,
     }
 
@@ -226,6 +226,29 @@ app.delete("/product/:ProductID", (req,res)=>{
     })
 
 })
+
+
+//Updating the books which we have added.
+app.put("/product/:ProductID", (req,res)=>{
+    const productId= req.params.ProductID;
+    const cloth= "UPDATE product SET `ProductName`=?, `ProductDescription`=?,`ProductPrice`=?, `ProductImage`=? WHERE ProductID=?";
+
+    //Writing the values.
+    const values=[
+        req.body.ProductName, 
+        req.body.ProductDescription,
+         req.body.ProductPrice, 
+         req.body.ProductImage
+    ];
+
+    db.query(cloth, [...values,productId], (err, data)=>{
+        if (err) return res.json(err);
+        return res.json("Product was updated successfully.");
+
+    })
+
+})
+
 
 
 
