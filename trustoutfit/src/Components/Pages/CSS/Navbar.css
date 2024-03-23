@@ -1,0 +1,31 @@
+.homebar{
+    background-color: beige;
+    padding: 0.5 2%;
+    
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+    color: black;
+    font-size: 18px;
+    padding-left: 25px;
+  }
+#searchbar{
+  /* color: black; */
+  border:0px;
+  border-radius: 0px;
+  position: relative;
+  left: 10px;
+  box-shadow: 5px 5px 11px 0px #00000021 ;
+
+}
+#searchbtn{
+  position: relative;
+  /* z-index: 99; */
+  background-color: rgb(154, 147, 147);
+  color: white;
+  border: 0;
+  border-radius: 0;
+}
+
+#searchform{
+  margin-right: 30px;
+}

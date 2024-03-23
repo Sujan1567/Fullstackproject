@@ -22,10 +22,11 @@ const salt = 10;
 const app = express();
 //formatting into the Json 
 app.use(express.json());
+// app.use(cors());
 app.use(cors(
     {
         origin: ['http://localhost:3000'],
-        methods: ["POST", "GET"],
+        methods: ["POST", "GET", "DELETE"],
         credentials: true,
     }
 
@@ -189,6 +190,41 @@ app.get("/", verifyrole, (req, res) => {
 app.get("/logout", (req,res) =>{
     res.clearCookie("token");
     return res.json({Status: "Success"});
+})
+
+
+
+app.get("/product", (req,res) =>{
+    const cloth= "SELECT * FROM product"
+    db.query(cloth,(err,data)=>{
+        if (err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+
+app.post("/product", (req,res)=>{
+    const cloth="INSERT INTO product(`ProductName`, `ProductDescription`,`ProductPrice`,`ProductImage`) VALUES(?)"
+    const values= [req.body.ProductName, req.body.ProductDescription, req.body.ProductPrice, req.body.ProductImage];
+
+    db.query(cloth, [values], (err, data)=>{
+        if (err) return res.json(err)
+        return res.json("Product was added successfully.");
+
+    })
+})
+
+
+app.delete("/product/:ProductID", (req,res)=>{
+    const productId= req.params.ProductID;
+    const cloth= "DELETE FROM product WHERE ProductID=?"
+
+    db.query(cloth, [productId], (err, data)=>{
+        if (err) return res.json(err);
+        return res.json("Product was deleted successfully.");
+
+    })
+
 })
 
 

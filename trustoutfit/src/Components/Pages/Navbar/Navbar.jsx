@@ -1,6 +1,6 @@
 import { Link, NavLink } from 'react-router-dom';
-import '../CSS/Home.css';
 import Logo from '../../Images/Logo2.png';
+import '../CSS/Navbar.css';
 
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
@@ -73,7 +73,7 @@ const Navbar = () => {
                                     Category
                                 </a>
                                 <ul className="dropdown-menu">
-                                    <li><a className="dropdown-item" href="#">Men</a></li>
+                                    <li><NavLink to ="/Malebrand" className="dropdown-item">Men</NavLink></li>
                                     <li><a className="dropdown-item" href="#">Women</a></li>
                                     <li><hr className="dropdown-divider" /></li>
                                     <li><a className="dropdown-item" href="#">Kid</a></li>
