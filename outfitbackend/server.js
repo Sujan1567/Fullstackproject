@@ -13,6 +13,19 @@ const jwt = require('jsonwebtoken');
 //Importing the encryption.
 const bcrypt = require('bcrypt');
 
+//Importing the fileupload.
+// const fileupload = require('express-fileupload');
+
+//Having the connection to the conn folder.
+require('./db/conn');
+
+//Having the connection to the router page.
+const router= require("./routes/router");
+
+
+
+
+
 //Importing the cookieparser.
 const cookieParser = require('cookie-parser');
 const salt = 10;
@@ -31,8 +44,21 @@ app.use(cors(
     }
 
 ));
+
+//using the uploads to get the images.
+app.use("/uploads", express.static("./uploads") )
+
+//using the router.
+app.use(router)
+
+
+
+
 //Using the cookieParser.
 app.use(cookieParser());
+
+//using the express static public for extracting the image from the server side.
+app.use(express.static('Public'));
 
 
 //Creating the connection to the Database by following configuration.
@@ -139,7 +165,7 @@ const verifyuser = (req, res, next) => {
             if (err) {
                 return res.json({ Error: "Token is not corrected" });
 
-            }else{
+            } else {
                 req.name = decoded.name;
                 next();
             }
@@ -151,8 +177,8 @@ const verifyuser = (req, res, next) => {
 }
 
 app.get("/", verifyuser, (req, res) => {
-    return res.json({Status: "Success", name: req.name});
-   
+    return res.json({ Status: "Success", name: req.name });
+
 
 })
 
@@ -167,7 +193,7 @@ const verifyrole = (req, res, next) => {
             if (err) {
                 return res.json({ Error: "Token is not corrected" });
 
-            }else{
+            } else {
                 req.role = decoded.role;
                 next();
             }
@@ -182,75 +208,28 @@ const verifyrole = (req, res, next) => {
 //Creating the practising the routes for authorization of the user.
 app.get("/", verifyrole, (req, res) => {
 
-    return res.json({Status: "Success", role: req.role});
+    return res.json({ Status: "Success", role: req.role });
 
 })
 
 //creating the practise API for logout.
-app.get("/logout", (req,res) =>{
+app.get("/logout", (req, res) => {
     res.clearCookie("token");
-    return res.json({Status: "Success"});
+    return res.json({ Status: "Success" });
 })
 
 
 
-app.get("/product", (req,res) =>{
-    const cloth= "SELECT * FROM product"
-    db.query(cloth,(err,data)=>{
-        if (err) return res.json(err)
-        return res.json(data)
-    })
+
+
+
+
+
+
+//Practising for the add button.
+app.get("/add", (req,res)=>{
+    res.send("Server started")
 })
-
-
-app.post("/product", (req,res)=>{
-    const cloth="INSERT INTO product(`ProductName`, `ProductDescription`,`ProductPrice`,`ProductImage`) VALUES(?)"
-    const values= [req.body.ProductName, req.body.ProductDescription, req.body.ProductPrice, req.body.ProductImage];
-
-    db.query(cloth, [values], (err, data)=>{
-        if (err) return res.json(err)
-        return res.json("Product was added successfully.");
-
-    })
-})
-
-
-app.delete("/product/:ProductID", (req,res)=>{
-    const productId= req.params.ProductID;
-    const cloth= "DELETE FROM product WHERE ProductID=?"
-
-    db.query(cloth, [productId], (err, data)=>{
-        if (err) return res.json(err);
-        return res.json("Product was deleted successfully.");
-
-    })
-
-})
-
-
-//Updating the books which we have added.
-app.put("/product/:ProductID", (req,res)=>{
-    const productId= req.params.ProductID;
-    const cloth= "UPDATE product SET `ProductName`=?, `ProductDescription`=?,`ProductPrice`=?, `ProductImage`=? WHERE ProductID=?";
-
-    //Writing the values.
-    const values=[
-        req.body.ProductName, 
-        req.body.ProductDescription,
-         req.body.ProductPrice, 
-         req.body.ProductImage
-    ];
-
-    db.query(cloth, [...values,productId], (err, data)=>{
-        if (err) return res.json(err);
-        return res.json("Product was updated successfully.");
-
-    })
-
-})
-
-
-
 
 
 //Making the get method.

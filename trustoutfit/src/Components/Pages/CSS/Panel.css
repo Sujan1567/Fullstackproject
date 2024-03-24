@@ -4,10 +4,13 @@
 
 #BAR{
     background-color: rgb(246, 183, 137);
+   
+
 }
 
 .nav-pills .nav-link.active {
     background-color: rgb(246, 246, 170);
     color: rgb(22, 22, 22); /* Change the text color to ensure visibility */
 }
+
 

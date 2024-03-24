@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../CSS/Panel.css'
 import { NavLink, Outlet } from 'react-router-dom';
 
@@ -12,49 +12,15 @@ const Panel = () => {
         }
         setActiveMenuItem(menuItem);
     };
+
+   
+   
     return (
         <>
-            {/* <div className="flex-grow-1 d-flex flex-column">
-                <nav className="navbar navbar-expand-lg" id='NAV'>
-                    <div className="container-fluid">
-                        <a className="navbar-brand text-white" href="#">Navbar</a>
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li className="nav-item">
-                                    <a className="nav-link active text-white" aria-current="page" href="#">Home</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link text-white" href="#">Link</a>
-                                </li>
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dropdown
-                                    </a>
-                                    <ul className="dropdown-menu">
-                                        <li><a className="dropdown-item" href="#">Action</a></li>
-                                        <li><a className="dropdown-item" href="#">Another action</a></li>
-                                        <li><hr className="dropdown-divider" /></li>
-                                        <li><a className="dropdown-item" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link disabled text-white" aria-disabled="true">Disabled</a>
-                                </li>
-                            </ul>
-                            <form className="d-flex" role="search">
-                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-outline-success" type="submit">Search</button>
-                            </form>
-                        </div>
-                    </div>
-                </nav>
-            </div> */}
+            
 
 
-            <div className="d-flex" style={{ height: '100vh' }}>
+            <div className="d-flex" style={{ minHeight: '100vh' }}>
                 <div className="d-flex flex-column flex-shrink-0 p-3" style={{ width: '230px' }} id='BAR'>
                     <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
                         <svg className="bi me-2" width="40" height="32"></svg>
@@ -172,7 +138,7 @@ const Panel = () => {
                             </div>
                         </div>
                     </nav>
-                    <div className='Content'>
+                    <div className='Content flex-grow-1 overflow-auto'>
                         <Outlet />
 
                     </div>
@@ -181,119 +147,6 @@ const Panel = () => {
                 </div>
             </div>
 
-            {/* <div className='Content'>
-                <Outlet />
-
-            </div> */}
-
-            {/* <div className="flex-grow-1">
-                <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                    <div className="container-fluid">
-                        <a className="navbar-brand" href="#">Navbar</a>
-                        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                                <li className="nav-item">
-                                    <a className="nav-link active" aria-current="page" href="#">Home</a>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link" href="#">Link</a>
-                                </li>
-                                <li className="nav-item dropdown">
-                                    <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Dropdown
-                                    </a>
-                                    <ul className="dropdown-menu">
-                                        <li><a className="dropdown-item" href="#">Action</a></li>
-                                        <li><a className="dropdown-item" href="#">Another action</a></li>
-                                        <li><hr className="dropdown-divider" /></li>
-                                        <li><a className="dropdown-item" href="#">Something else here</a></li>
-                                    </ul>
-                                </li>
-                                <li className="nav-item">
-                                    <a className="nav-link disabled" aria-disabled="true">Disabled</a>
-                                </li>
-                            </ul>
-                            <form className="d-flex" role="search">
-                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-outline-success" type="submit">Search</button>
-                            </form>
-                        </div>
-                    </div>
-                </nav>
-            </div> */}
-
-            {/* <div className="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style={{ width: '280px' }}>
-                <a href="/" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-                    <svg className="bi me-2" width="40" height="32"></svg>
-                    <span className="fs-4">Sidebar</span>
-                </a>
-                <hr />
-                <ul className="nav nav-pills flex-column mb-auto">
-                    <li className="nav-item">
-                        <a href="#" className="nav-link active" aria-current="page">
-                            <span className='material-icons-sharp spread'>grid_view</span>
-                            Home
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link text-white">
-                            <span className='material-icons-sharp spread'>person_outline</span>
-                            Customers
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link text-white">
-                            <span className='material-icons-sharp spread'>receipt_long</span>
-                            Orders
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link text-white">
-                            <span className='material-icons-sharp spread'>inventory</span>
-                            Products
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" className="nav-link text-white">
-                            <span className='material-icons-sharp spread'>report_gmailerrorred</span>
-                            Reports
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#" className="nav-link text-white">
-                            <span className='material-icons-sharp spread'>settings</span>
-                            Settings
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#" className="nav-link text-white">
-                            <span className='material-icons-sharp spread'>logout</span>
-                            Logout
-                        </a>
-                    </li>
-
-
-                </ul>
-                <hr />
-                <div className="dropdown">
-                    <a href="#" className="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://github.com/mdo.png" alt="" width="32" height="32" className="rounded-circle me-2" />
-                        <strong>mdo</strong>
-                    </a>
-                    <ul className="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                        <li><a className="dropdown-item" href="#">New project...</a></li>
-                        <li><a className="dropdown-item" href="#">Settings</a></li>
-                        <li><a className="dropdown-item" href="#">Profile</a></li>
-                        <li><hr className="dropdown-divider" /></li>
-                        <li><a className="dropdown-item" href="#">Sign out</a></li>
-                    </ul>
-                </div>
-            </div> */}
 
         </>
     )
