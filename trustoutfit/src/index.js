@@ -12,11 +12,39 @@ import Malebrand from './Components/Pages/Malebrand/Malebrand';
 
 //Importing the provider and store for the App components.
 import { Provider } from 'react-redux';
-import { store } from './redux/app/store';
+// import { store } from './redux/app/store';
+import { productsFetch } from './redux/features/Cartslice';
+// import { productsAPI } from './redux/features/productsAPI';
+
+import { configureStore } from "@reduxjs/toolkit";
+// import Cartslice, { productsFetch } from "../features/Cartslice";
+import { productsAPI } from './redux/features/productsAPI';
+import Cartslice from './redux/features/Cartslice';
+import addcartReducer from './redux/features/addcartslice';
+// import { buildGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
 
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
+
+export const store = configureStore({
+  reducer:{
+      allcart: Cartslice,
+      cart: addcartReducer,
+      [productsAPI.reducerPath]: productsAPI.reducer,
+
+
+  },
+  middleware: (getDefaultMiddleware) =>{
+    return getDefaultMiddleware().concat(productsAPI.middleware)
+  }
+
+});
+
+store.dispatch(productsFetch());
+
+
+
 
 root.render(
   <StrictMode>

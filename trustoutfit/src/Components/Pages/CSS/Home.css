@@ -156,4 +156,13 @@
   color:rgb(254, 166, 78)
 }
 
+.not-found{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgb(68,68,68);
+  min-height: 80vh;
+}
+
 

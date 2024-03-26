@@ -1,72 +1,101 @@
 import React from 'react'
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios';
 
 //Creating the empty array.
 const initialState = {
-    carts: []
+    carts: [],
+    status: null,
+    error: null
 
-}
+};
+
+//using the asynthunk .
+export const productsFetch = createAsyncThunk(
+    //This is the action type.
+    "cartslice/productsFetch",
+    //This is the function type.
+    async () => {
+
+        const response = await axios.get("http://localhost:8081/CartProducts")
+        return response?.data
+
+    }
+)
 
 //Creating the slice for the cart.
 const Cartslice = createSlice({
     name: "cartslice",
     initialState,
-    reducers:{
-        //add to cart
-        addToCart: (state, action) =>{
-            //Incresing the quantity of the products whether it is added or not.
-            const IteamIndex = state.carts.findIndex((iteam)=> iteam.id === action.payload.id );
-            // console.log(IteamIndex);
+    reducers: {
 
-            //Making the condition whether the product of the ceratin index is present or not.
-            if(IteamIndex >= 0){
-                //Increasing the qantity number.
-                state.carts[IteamIndex].quantity += 1
+        // addToCart: (state, action) =>{
 
-            } else{
-                const temp= {...action.payload, quantity: 1}
-
-                //Using the state operation for storing the previous value and new value.
-                state.carts = [...state.carts,  temp]
-            }
+        //     const IteamIndex = state.carts.findIndex((iteam)=> iteam.id === action.payload.id );
 
 
-        },
+        //     if(IteamIndex >= 0){
 
-        //Remove the particular iteams.  
-        removeToCart: (state, action) =>{
-            const data = state.carts.filter((ele)=> ele.id !== action.payload);
-            state.carts = data;
+        //         state.carts[IteamIndex].quantity += 1
 
-        },
-
-        //Remove single items.
-        removeSingleIteams: (state, action) =>{
-            const IteamIndex_dec = state.carts.findIndex((iteam)=> iteam.id === action.payload.id );
-
-            if(state.carts[IteamIndex_dec].quantity >= 1){
-                state.carts[IteamIndex_dec].quantity  -= 1
-            }
+        //     } else{
+        //         const temp= {...action.payload, quantity: 1}
 
 
+        //         state.carts = [...state.carts,  temp]
+        //     }
 
 
-        },
+        // },
 
-        //Clearing all the cart.
-        emptyCartIteam:(state,action) =>{
-            state.carts = []
 
-        }
+        // removeToCart: (state, action) =>{
+        //     const data = state.carts.filter((ele)=> ele.id !== action.payload);
+        //     state.carts = data;
+
+        // },
+
+
+        // removeSingleIteams: (state, action) =>{
+        //     const IteamIndex_dec = state.carts.findIndex((iteam)=> iteam.id === action.payload.id );
+
+        //     if(state.carts[IteamIndex_dec].quantity >= 1){
+        //         state.carts[IteamIndex_dec].quantity  -= 1
+        //     }
 
 
 
 
+        // },
+
+
+        // emptyCartIteam:(state,action) =>{
+        //     state.carts = []
+
+        // }
+
+
+
+
+    },
+    extraReducers: (builder) => {
+        builder
+            .addCase(productsFetch.pending, (state, action) => {
+                state.status = "pending";
+            })
+            .addCase(productsFetch.fulfilled, (state, action) => {
+                state.status = "success";
+                state.carts = action.payload;
+            })
+            .addCase(productsFetch.rejected, (state, action) => {
+                state.status = "rejected";
+                
+            });
     }
 
 
 });
-export const {addToCart, removeToCart, removeSingleIteams, emptyCartIteam}= Cartslice.actions;
+// export const {addToCart, removeToCart, removeSingleIteams, emptyCartIteam}= Cartslice.actions;
 
 //Exporting the reducers.
 export default Cartslice.reducer;

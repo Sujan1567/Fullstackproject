@@ -1,0 +1,41 @@
+.ArrivalContain{
+    padding: 2rem 4rem;
+} 
+
+ .CartProducts{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.product{
+    width: 350px;
+    max-width: 100%;
+    height: 510px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 1rem auto;
+    padding: 1rem;
+    border-radius: 15px ;
+    box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.5),2px 2px 5px rgba(94, 104, 121, 0.3);
+}
+.Productimag{
+    width: 70%;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.product .details{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product .details .price{
+    font-size: 20px;
+    font-weight: 200;
+}
+

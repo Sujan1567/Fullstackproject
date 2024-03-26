@@ -149,5 +149,10 @@ router.put("/update/:ProductID", upload.single("photo"), (req, res) => {
 
 
 
+
+
+
+
+
 //Exporting the router.
 module.exports= router;

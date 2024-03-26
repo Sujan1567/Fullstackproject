@@ -22,6 +22,9 @@ require('./db/conn');
 //Having the connection to the router page.
 const router= require("./routes/router");
 
+//Importing the products.
+const products= require('./Cartproducts');
+
 
 
 
@@ -50,6 +53,9 @@ app.use("/uploads", express.static("./uploads") )
 
 //using the router.
 app.use(router)
+
+
+//Importing the cloudinary
 
 
 
@@ -217,6 +223,21 @@ app.get("/logout", (req, res) => {
     res.clearCookie("token");
     return res.json({ Status: "Success" });
 })
+
+
+
+//Creating the API call for the cart.
+app.get("/cart", (req,res)=>{
+    res.send("Welcome to our online shopping API");
+})
+
+//Creating for the fake products.
+app.get("/CartProducts", (req,res)=>{
+    //Sending the products.
+    res.send(products);
+})
+
+
 
 
 
