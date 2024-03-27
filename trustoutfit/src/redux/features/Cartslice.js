@@ -1,101 +1,112 @@
-import React from 'react'
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios';
+import { createSlice } from "@reduxjs/toolkit";
+// import Cartslice from "./productslice";
+import { toast } from "react-toastify";
 
-//Creating the empty array.
 const initialState = {
-    carts: [],
-    status: null,
-    error: null
-
+    cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
+    cartTotalQuantity: 0,
+    cartTotalAmount: 0,
 };
 
-//using the asynthunk .
-export const productsFetch = createAsyncThunk(
-    //This is the action type.
-    "cartslice/productsFetch",
-    //This is the function type.
-    async () => {
-
-        const response = await axios.get("http://localhost:8081/CartProducts")
-        return response?.data
-
-    }
-)
-
-//Creating the slice for the cart.
-const Cartslice = createSlice({
-    name: "cartslice",
+const addcartslice = createSlice({
+    name: "cart",
     initialState,
     reducers: {
+        addTocart(state, action) {
+            const itemIndex = state.cartItems.findIndex(item => item.id === action.payload.id);
+            if (itemIndex >= 0) {
+                state.cartItems[itemIndex].cartQuantity += 1;
+                toast.info(`increased ${state.cartItems[itemIndex].name} cart quantity.`, {
+                    position: "bottom-left",
+                })
 
-        // addToCart: (state, action) =>{
+            } else {
 
-        //     const IteamIndex = state.carts.findIndex((iteam)=> iteam.id === action.payload.id );
+                const tempProduct = { ...action.payload, cartQuantity: 1 };
+                state.cartItems.push(tempProduct);
+                toast.success(`${action.payload.name}  Added a new product to cart.`, {
+                    position: "bottom-left",
+                })
+            }
 
+            //Storing in the localstorage.
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        },
 
-        //     if(IteamIndex >= 0){
+        //Adding the reducers form the cart.
+        removeFromCart(state, action) {
+            const nextCartItems = state.cartItems.filter(
+                cartItem => cartItem.id !== action.payload.id
+            )
 
-        //         state.carts[IteamIndex].quantity += 1
+            state.cartItems = nextCartItems;
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems))
 
-        //     } else{
-        //         const temp= {...action.payload, quantity: 1}
+            toast.error(`${action.payload.name}  remove from cart.`, {
+                position: "bottom-left",
+            })
 
+        },
 
-        //         state.carts = [...state.carts,  temp]
-        //     }
+        decreaseCart(state, action) {
+            const itemIndex = state.cartItems.findIndex(
+                cartItem => cartItem.id === action.payload.id
+            )
 
+            if (state.cartItems[itemIndex].cartQuantity > 1) {
+                state.cartItems[itemIndex].cartQuantity -= 1
 
-        // },
+                toast.info(` Decreased ${action.payload.name}  cart quantity`, {
+                    position: "bottom-left",
+                })
+            } else if (state.cartItems[itemIndex].cartQuantity === 1) {
+                const nextCartItems = state.cartItems.filter(
+                    cartItem => cartItem.id !== action.payload.id
+                )
 
+                state.cartItems = nextCartItems;
 
-        // removeToCart: (state, action) =>{
-        //     const data = state.carts.filter((ele)=> ele.id !== action.payload);
-        //     state.carts = data;
+                toast.error(`${action.payload.name}  remove from cart.`, {
+                    position: "bottom-left",
+                })
 
-        // },
+            }
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        },
 
+        clearCart(state, action) {
+            state.cartItems = [];
+            toast.error(`Cart cleared`, {
+                position: "bottom-left",
+            })
+            localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
 
-        // removeSingleIteams: (state, action) =>{
-        //     const IteamIndex_dec = state.carts.findIndex((iteam)=> iteam.id === action.payload.id );
+        },
 
-        //     if(state.carts[IteamIndex_dec].quantity >= 1){
-        //         state.carts[IteamIndex_dec].quantity  -= 1
-        //     }
+        //Defining for the getting the total price.
+        getTotals(state, action){
+            let {total, quantity} = state.cartItems.reduce((cartTotal, cartItem )=>{
+                const { Price, cartQuantity } = cartItem;
+                const itemTotal = Price * cartQuantity;
 
+                cartTotal.total += itemTotal
+                cartTotal.quantity  += cartQuantity
 
+                return cartTotal;
+            }, {
+              total: 0 ,
+              quantity: 0
 
+            })
 
-        // },
-
-
-        // emptyCartIteam:(state,action) =>{
-        //     state.carts = []
-
-        // }
-
-
+            state.cartTotalQuantity = quantity;
+            state.cartTotalAmount = total
+        }
 
 
     },
-    extraReducers: (builder) => {
-        builder
-            .addCase(productsFetch.pending, (state, action) => {
-                state.status = "pending";
-            })
-            .addCase(productsFetch.fulfilled, (state, action) => {
-                state.status = "success";
-                state.carts = action.payload;
-            })
-            .addCase(productsFetch.rejected, (state, action) => {
-                state.status = "rejected";
-                
-            });
-    }
+})
 
+export const { addTocart, removeFromCart, decreaseCart, clearCart, getTotals } = addcartslice.actions;
 
-});
-// export const {addToCart, removeToCart, removeSingleIteams, emptyCartIteam}= Cartslice.actions;
-
-//Exporting the reducers.
-export default Cartslice.reducer;
+export default addcartslice.reducer;

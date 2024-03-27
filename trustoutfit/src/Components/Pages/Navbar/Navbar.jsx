@@ -7,7 +7,10 @@ import { useSelector } from 'react-redux';
 import axios from 'axios';
 
 const Navbar = () => {
-    const { carts } = useSelector((state) => state.allcart);
+    // const { carts } = useSelector((state) => state.allcart);
+    const {cartTotalQuantity} = useSelector(state=> state.cart);
+
+
 
     const [auth, setAuth] = useState(false);
     // const [message, setMessage] = useState('');
@@ -60,13 +63,13 @@ const Navbar = () => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                                <NavLink to="/" className="nav-link active" aria-current="page" href="#">Home</NavLink>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">Shop</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">New Arrivals</a>
+                                <NavLink to="/Arrival" className="nav-link" href="#">New Arrivals</NavLink>
                             </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -128,7 +131,7 @@ const Navbar = () => {
                             <div className='nav-CART'>
                                     <i className="bi bi-cart" id='cart'></i>
                                 <span className='bag-quantity'>
-                                    <span>4</span>
+                                    <span>{cartTotalQuantity}</span>
                                 </span>
                             </div>
                         </NavLink>

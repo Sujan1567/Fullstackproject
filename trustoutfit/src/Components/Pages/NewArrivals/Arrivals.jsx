@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import Navbar from '../Navbar/Navbar'
 import {  useGetAllProductsQuery } from '../../../redux/features/productsAPI'
 import { useDispatch } from 'react-redux'
-import { addTocart } from '../../../redux/features/addcartslice'
+import { addTocart } from '../../../redux/features/cartslice'
 
 const Arrivals = () => {
     // const {items, status} = useSelector(state => state.CartProducts)

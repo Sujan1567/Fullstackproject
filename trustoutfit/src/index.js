@@ -13,14 +13,14 @@ import Malebrand from './Components/Pages/Malebrand/Malebrand';
 //Importing the provider and store for the App components.
 import { Provider } from 'react-redux';
 // import { store } from './redux/app/store';
-import { productsFetch } from './redux/features/Cartslice';
+import { productsFetch } from './redux/features/productslice';
 // import { productsAPI } from './redux/features/productsAPI';
 
 import { configureStore } from "@reduxjs/toolkit";
 // import Cartslice, { productsFetch } from "../features/Cartslice";
 import { productsAPI } from './redux/features/productsAPI';
-import Cartslice from './redux/features/Cartslice';
-import addcartReducer from './redux/features/addcartslice';
+import Cartslice from './redux/features/productslice';
+import addcartReducer, { getTotals } from './redux/features/cartslice';
 // import { buildGetDefaultMiddleware } from '@reduxjs/toolkit/dist/getDefaultMiddleware';
 
 
@@ -42,6 +42,7 @@ export const store = configureStore({
 });
 
 store.dispatch(productsFetch());
+store.dispatch(getTotals());
 
 
 
